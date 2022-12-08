@@ -1,0 +1,20 @@
+{
+  "name": "file-manager",
+  "version": "1.0.0",
+  "description": "file-manger",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dab10/file-manager-node.git"
+  },
+  "author": "dab10",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dab10/file-manager-node/issues"
+  },
+  "homepage": "https://github.com/dab10/file-manager-node#readme"
+}
