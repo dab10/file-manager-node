@@ -2,10 +2,10 @@
   "name": "file-manager",
   "version": "1.0.0",
   "description": "file-manger",
-  "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node src/index.js",
+    "test": "node src/index.js --username=Anon"
   },
   "repository": {
     "type": "git",
