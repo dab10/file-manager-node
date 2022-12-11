@@ -15,8 +15,14 @@ export const cd = async (prevPath, chunkStringified) => {
     return prevPath
   } 
 
+  if (inputPath.includes('*') || inputPath.includes('?') || inputPath.includes('<') || inputPath.includes('>') || inputPath.includes('|')) {
+    process.stdout.write(`Invalid input\n`);
+    return prevPath
+  } 
+
   let countDoubleMarks = 0;
   let isDoubleMarksInDiskName = false;
+  let isInvalidPath = false;
   let inputPathNormalize = path.normalize(inputPath);
 
   const inputPathRes = inputPathNormalize.split(`${path.sep}`).map((item, index) => {
@@ -46,7 +52,7 @@ export const cd = async (prevPath, chunkStringified) => {
       return item;
     } 
   }).join(path.sep);
-  if (countDoubleMarks % 2 === 1 || isDoubleMarksInDiskName) {
+  if (countDoubleMarks % 2 === 1 || isDoubleMarksInDiskName || isInvalidPath) {
     process.stdout.write(`Invalid input\n`);
     return prevPath;
   }
