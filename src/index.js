@@ -1,12 +1,13 @@
 import os from 'node:os';
 import { parseArg } from "./cli/args.js";
 import { up } from "./fs/up.js";
+import { cd } from './fs/cd.js';
 
 let currentPath = os.homedir();
 const username = parseArg();
 process.stdout.write(`You are currently in ${currentPath}\n`);
 
-const echoInput = (chunk) => {
+const echoInput = async (chunk) => {
   const chunkStringified = chunk.toString().trim();
 
   if (chunkStringified === '.exit') {
@@ -14,9 +15,18 @@ const echoInput = (chunk) => {
     process.exit();
   }
   if (chunkStringified === 'up') {
-    currentPath = up(currentPath) + '\n';
+    currentPath = up(currentPath);
+    process.stdout.write('\n');
   }
-  process.stdout.write(`You are currently in ${currentPath}`);
+
+  if (chunkStringified.startsWith('cd ')) {
+    // console.log('11111\n')
+    // currentPath = cd(currentPath, chunkStringified) + '\n';
+    currentPath = await cd(currentPath, chunkStringified);
+    process.stdout.write('\n');
+  }
+  process.stdout.write(`You are currently in ${currentPath}\n`);
+
   // process.stdout.write(`Received from master process: ${chunk.toString()}\n`)
 };
 
