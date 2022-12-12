@@ -4,6 +4,7 @@ import { up } from "./fs/up.js";
 import { cd } from './fs/cd.js';
 import * as readline from 'node:readline/promises';
 import { stdin as input, stdout as output } from 'process';
+import { list } from './fs/ls.js';
 
 let currentPath = os.homedir();
 const username = parseArg();
@@ -27,6 +28,13 @@ rl.on( 'line' , async (query) => {
 
   if (query.startsWith('cd ')) {
     currentPath = await cd(currentPath, query);
+    rl.setPrompt(`You are currently in ${currentPath}\n`);
+    rl.prompt();
+  }
+
+  if (query === 'ls') {
+    const folderContain = await list(currentPath);
+    console.table(folderContain);
     rl.setPrompt(`You are currently in ${currentPath}\n`);
     rl.prompt();
   }
