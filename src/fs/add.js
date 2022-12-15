@@ -32,9 +32,8 @@ export const add = async (currentPath, query) => {
   }
 
   try {
-    const promise = writeFile(path.join(currentPath, fileName), '', { flag: 'wx' });
+    const promise = writeFile(path.join(currentPath, fileName.trim()), '', { flag: 'wx+' });
     await promise;
-    
   } catch {
     process.stdout.write('Operation failed\n');
   }
