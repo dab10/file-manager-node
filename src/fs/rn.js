@@ -19,11 +19,11 @@ export const rn = async (currentPath, query) => {
       const previousFile = await cd(currentPath, 'cd ' + firstArg, false);
       console.log(previousFile)
 
-      if (previousFile[previousFile.length - 1] === '\\') {
+      if (previousFile[previousFile.length - 1] === path.sep) {
         previousFile = previousFile.slice(0, -1);
-        newFile = path.join(previousFile.slice(0, previousFile.lastIndexOf('\\')), secondArgWithoutMarks.trim());
+        newFile = path.join(previousFile.slice(0, previousFile.lastIndexOf(path.sep)), secondArgWithoutMarks.trim());
       } else {
-        newFile = path.join(previousFile.slice(0, previousFile.lastIndexOf('\\')), secondArgWithoutMarks.trim());
+        newFile = path.join(previousFile.slice(0, previousFile.lastIndexOf(path.sep)), secondArgWithoutMarks.trim());
       }
 
       console.log(newFile)
