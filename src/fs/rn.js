@@ -1,5 +1,4 @@
-import path, { dirname } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import path from 'node:path';
 import { rename as renameFile, readFile, access, constants } from 'node:fs/promises';
 import { parsePathArgs } from '../utils/parsePathArgs.js';
 import { cd } from './cd.js';
@@ -15,7 +14,7 @@ export const rn = async (currentPath, query) => {
     try {
       let isAccessNewFile = false;
       let newFile;
-      let newFilePath;
+
       const secondArgWithoutMarks = secondArg.split('"').join('');
       const previousFile = await cd(currentPath, 'cd ' + firstArg, false);
       console.log(previousFile)
@@ -34,13 +33,13 @@ export const rn = async (currentPath, query) => {
       try {
         await access(newFile, constants.R_OK | constants.W_OK);
         isAccessNewFile = true;
-        process.stdout.write('Operation failed\n1111111111');
+        process.stdout.write('Operation failed\n');
       } catch {
         if (!isAccessNewFile) await renameFile(previousFile, newFile);
         if (isAccessNewFile) process.stdout.write('Operation failed\n');
       }
     } catch {
-      process.stdout.write('Operation failed\n11111');
+      process.stdout.write('Operation failed\n');
     }
   } else {
     process.stdout.write(`Invalid input\n`);

@@ -26,6 +26,7 @@ export const cd = async (prevPath, chunkStringified, isDirectoryCheck) => {
   let isDoubleMarksInDiskName = false;
   let isInvalidPath = false;
   let inputPathNormalize = path.normalize(inputPath);
+  if (inputPathNormalize[inputPathNormalize.length - 1] === '\\') inputPathNormalize = inputPathNormalize.slice(0, -1)
 
   const inputPathRes = inputPathNormalize.split(`${path.sep}`).map((item, index) => {
     if (index === 0) {

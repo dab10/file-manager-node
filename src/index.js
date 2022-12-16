@@ -8,6 +8,7 @@ import { list } from './fs/ls.js';
 import { cat } from './fs/cat.js';
 import { add } from './fs/add.js';
 import { rn } from './fs/rn.js';
+import { cp } from './fs/cp.js';
 
 let currentPath = os.homedir();
 const username = parseArg(currentPath);
@@ -51,6 +52,13 @@ rl.on( 'line' , async (query) => {
   if (query.startsWith('rn ')) {
     await rn(currentPath, query);
     process.stdout.write(`\nYou are currently in ${currentPath}\n`);
+  }  
+
+  if (query.startsWith('cp ')) {
+    rl.pause();
+    await cp(currentPath, query);
+    process.stdout.write(`\nYou are currently in ${currentPath}\n`);
+    rl.resume();
   }  
 });
 
