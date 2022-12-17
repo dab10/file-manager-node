@@ -9,8 +9,8 @@ export const list = async (currentPath) => {
     let filesResult = []
 
     const allData = await readdir(path.normalize(currentPath), { withFileTypes: true });
-    const directories = allData.filter(item => item.isDirectory()).map(item => item.name);
-    const files = allData.filter(item => item.isFile()).map(item => item.name);
+    const directories = allData.filter(item => item.isDirectory()).map(item => item.name).sort();
+    const files = allData.filter(item => item.isFile()).map(item => item.name).sort();
 
     for (let i = 0; i < directories.length; i++) {
       directoriesResult.push({ 'Name': directories[i], 'Type': 'directory' })

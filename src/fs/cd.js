@@ -1,12 +1,6 @@
-import fs from "fs/promises";
 import path from 'node:path';
 import { chdir } from "process";
-
-const pathExists = (path) =>
-  fs.stat(path).then(
-    () => true,
-    () => false
-  );
+import { pathExists } from "../utils/pathExists.js";
 
 export const cd = async (prevPath, chunkStringified, isDirectoryCheck) => {
   let inputPath = chunkStringified.slice(3);

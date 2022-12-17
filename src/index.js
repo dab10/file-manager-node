@@ -24,23 +24,27 @@ rl.on( 'line' , async (query) => {
   if (query === '.exit') {
     process.stdout.write(`\nThank you for using File Manager, ${username}, goodbye!`);
     rl.close();
+    return;
   }
 
   if (query === 'up') {
     currentPath = up(currentPath);
     process.stdout.write(`You are currently in ${currentPath}\n`);
+    return;
   }
 
   if (query.startsWith('cd ')) {
     const isDirectoryCheck = true;
     currentPath = await cd(currentPath, query, isDirectoryCheck);
     process.stdout.write(`You are currently in ${currentPath}\n`);
+    return;
   }
 
   if (query === 'ls') {
     const folderContain = await list(currentPath);
     console.table(folderContain);
     process.stdout.write(`You are currently in ${currentPath}\n`);
+    return;
   }
 
   if (query.startsWith('cat ')) {
@@ -48,16 +52,19 @@ rl.on( 'line' , async (query) => {
     await cat(currentPath, query);
     process.stdout.write(`\nYou are currently in ${currentPath}\n`);
     rl.resume();
+    return;
   }   
 
   if (query.startsWith('add ')) {
     await add(currentPath, query);
     process.stdout.write(`\nYou are currently in ${currentPath}\n`);
+    return;
   }   
 
   if (query.startsWith('rn ')) {
     await rn(currentPath, query);
     process.stdout.write(`\nYou are currently in ${currentPath}\n`);
+    return;
   }  
 
   if (query.startsWith('cp ')) {
@@ -65,6 +72,7 @@ rl.on( 'line' , async (query) => {
     await cp(currentPath, query);
     process.stdout.write(`\nYou are currently in ${currentPath}\n`);
     rl.resume();
+    return;
   }  
 
   if (query.startsWith('mv ')) {
@@ -72,6 +80,7 @@ rl.on( 'line' , async (query) => {
     await mv(currentPath, query);
     process.stdout.write(`\nYou are currently in ${currentPath}\n`);
     rl.resume();
+    return;
   }  
 
   if (query.startsWith('rm ')) {
@@ -79,11 +88,13 @@ rl.on( 'line' , async (query) => {
     await rm(currentPath, query);
     process.stdout.write(`\nYou are currently in ${currentPath}\n`);
     rl.resume();
+    return;
   }  
 
   if (query.startsWith('os ')) {
     await osFM(query);
     process.stdout.write(`\nYou are currently in ${currentPath}\n`);
+    return;
   }  
 
   if (query.startsWith('hash ')) {
@@ -91,6 +102,7 @@ rl.on( 'line' , async (query) => {
     await hash(currentPath, query);
     process.stdout.write(`\nYou are currently in ${currentPath}\n`);
     rl.resume();
+    return;
   }  
 
   if (query.startsWith('compress ')) {
@@ -98,6 +110,7 @@ rl.on( 'line' , async (query) => {
     await compress(currentPath, query);
     process.stdout.write(`\nYou are currently in ${currentPath}\n`);
     rl.resume();
+    return;
   }
 
   if (query.startsWith('decompress ')) {
@@ -105,8 +118,11 @@ rl.on( 'line' , async (query) => {
     await decompress(currentPath, query);
     process.stdout.write(`\nYou are currently in ${currentPath}\n`);
     rl.resume();
+    return;
   } else {
     process.stdout.write(`Invalid input\n`);
+    process.stdout.write(`You are currently in ${currentPath}\n`);
+    return;
   }
 });
 
