@@ -13,6 +13,7 @@ import { mv } from './fs/mv.js';
 import { rm } from './fs/rm.js';
 import { osFM } from './os/osFM.js';
 import { hash } from './hash/hash.js';
+import { compress } from './zip/compress.js';
 
 let currentPath = os.homedir();
 const username = parseArg(currentPath);
@@ -87,6 +88,13 @@ rl.on( 'line' , async (query) => {
   if (query.startsWith('hash ')) {
     rl.pause();
     await hash(currentPath, query);
+    process.stdout.write(`\nYou are currently in ${currentPath}\n`);
+    rl.resume();
+  }  
+
+  if (query.startsWith('compress ')) {
+    rl.pause();
+    await compress(currentPath, query);
     process.stdout.write(`\nYou are currently in ${currentPath}\n`);
     rl.resume();
   }  

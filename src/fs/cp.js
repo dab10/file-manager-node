@@ -14,14 +14,12 @@ const pathExists = (path) =>
 export const cp = async (currentPath, query) => {
   const inputPath = path.normalize(query.slice(3));
   const { firstArg, secondArg } = parsePathArgs(inputPath);
-console.log(currentPath, query)
+
   if (firstArg && secondArg) {
     let inputPathForWrite;
     let secondArgNormalize = path.normalize(secondArg);
     const inputPathForRead = await cd(currentPath, 'cd ' + firstArg, false);
     const inputPathForWriteWithoutFilename = await cd(currentPath, 'cd ' + secondArg, false);
-
-
 
     if (inputPathForRead[inputPathForRead.length - 1] === path.sep) {
       inputPathForRead = inputPathForRead.slice(0, -1);
