@@ -11,6 +11,8 @@ import { rn } from './fs/rn.js';
 import { cp } from './fs/cp.js';
 import { mv } from './fs/mv.js';
 import { rm } from './fs/rm.js';
+import { osFM } from './os/osFM.js';
+import { hash } from './hash/hash.js';
 
 let currentPath = os.homedir();
 const username = parseArg(currentPath);
@@ -73,6 +75,18 @@ rl.on( 'line' , async (query) => {
   if (query.startsWith('rm ')) {
     rl.pause();
     await rm(currentPath, query);
+    process.stdout.write(`\nYou are currently in ${currentPath}\n`);
+    rl.resume();
+  }  
+
+  if (query.startsWith('os ')) {
+    await osFM(query);
+    process.stdout.write(`\nYou are currently in ${currentPath}\n`);
+  }  
+
+  if (query.startsWith('hash ')) {
+    rl.pause();
+    await hash(currentPath, query);
     process.stdout.write(`\nYou are currently in ${currentPath}\n`);
     rl.resume();
   }  
