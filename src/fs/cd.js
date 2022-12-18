@@ -62,6 +62,7 @@ export const cd = async (prevPath, chunkStringified, isDirectoryCheck) => {
   if (isDirectoryCheck) {
     if (/^[A-Za-z]:{1}/.test(inputPath)) {
       if (inputPath.length === 3 && inputPath[inputPath.length - 1] === '.') inputPath = inputPath.slice(0, -1) + `${path.sep}`
+      if (inputPath.length === 2 && inputPath[inputPath.length - 1] === ':') inputPath = inputPath + `${path.sep}`
         try {
           chdir(inputPath);
           return inputPath;
