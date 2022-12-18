@@ -5,12 +5,7 @@ import { pipeline } from 'stream/promises';
 import { createBrotliCompress } from 'node:zlib';
 import { parsePathArgs } from "../utils/parsePathArgs.js";
 import { cd } from "../fs/cd.js";
-
-const pathExists = (path) =>
-  fs.stat(path).then(
-    () => true,
-    () => false
-  );
+import { pathExists } from "../utils/pathExists.js";
 
 export const compress = async (currentPath, query) => {
   const inputPath = path.normalize(query.slice(9));

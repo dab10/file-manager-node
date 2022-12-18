@@ -15,7 +15,6 @@ export const cd = async (prevPath, chunkStringified, isDirectoryCheck) => {
     return prevPath
   } 
 
-  let inputPathCheck = false;
   let countDoubleMarks = 0;
   let isDoubleMarksInDiskName = false;
   let isInvalidPath = false;
@@ -67,7 +66,7 @@ export const cd = async (prevPath, chunkStringified, isDirectoryCheck) => {
           chdir(inputPath);
           return inputPath;
         } catch (err) {
-          process.stdout.write(`Operation failedFirst\n`);
+          process.stdout.write(`Operation failed\n`);
           return prevPath;
         }
     }
@@ -76,7 +75,7 @@ export const cd = async (prevPath, chunkStringified, isDirectoryCheck) => {
       chdir(path.join(prevPath, inputPath));
       return path.join(prevPath, inputPath);
     } catch (err) {
-      process.stdout.write(`Operation failedSecond\n`);
+      process.stdout.write(`Operation failed\n`);
       return prevPath;
     }
   }

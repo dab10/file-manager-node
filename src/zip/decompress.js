@@ -19,7 +19,7 @@ export const decompress = async (currentPath, query) => {
     const { dir: dirSecondArg, base: baseSecondArg } = path.parse(secondArgNormalize);
 
     if (extFirstArg !== '.br') {
-      return process.stdout.write('Invalid input\n111');
+      return process.stdout.write('Invalid input\n');
     }
 
     const inputPathForRead = await cd(currentPath, 'cd ' + firstArgNormalize, false);
@@ -30,19 +30,19 @@ export const decompress = async (currentPath, query) => {
     try {
       const data = await fs.lstat(inputPathForRead);
       if (!data.isFile()) {
-        return process.stdout.write('Operation failed\n222');
+        return process.stdout.write('Operation failed\n');
       }
     } catch {
-      return process.stdout.write('Operation failed\n333');
+      return process.stdout.write('Operation failed\n');
     }
 
     if (currentPath === inputPathForWriteWithoutFilename && 
       (dirSecondArg.length === 0 ? false : currentPath.slice(currentPath.lastIndexOf(path.sep)) !== dirSecondArg.slice(dirSecondArg.lastIndexOf(path.sep)))) {
-      return process.stdout.write('Operation failed\n444');
+      return process.stdout.write('Operation failed\n');
     }
 
     if (await pathExists(inputPathForWrite)) {
-      return process.stdout.write('Operation failed\n555');
+      return process.stdout.write('Operation failed\n');
     } else {
       const readable = createReadStream(inputPathForRead);
       const decompressBrotli = createBrotliDecompress();
@@ -51,10 +51,10 @@ export const decompress = async (currentPath, query) => {
       try {
         await pipeline(readable, decompressBrotli, writeable);
       } catch {
-        return process.stdout.write('Operation failed\n666');
+        return process.stdout.write('Operation failed\n');
       } 
     }
   } else {
-    return process.stdout.write(`Invalid input\n777`);
+    return process.stdout.write(`Invalid input\n`);
   }
 };

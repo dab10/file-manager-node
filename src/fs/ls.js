@@ -1,7 +1,6 @@
 import path from 'node:path';
 import { readdir } from 'node:fs/promises';
 
-
 export const list = async (currentPath) => {
 
   try {
@@ -20,6 +19,6 @@ export const list = async (currentPath) => {
     }
     return directoriesResult.concat(filesResult);
   } catch {
-    process.stdout.write('Operation failed');
+    process.stdout.write('Operation failed\n');
   }
 };
