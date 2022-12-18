@@ -9,15 +9,12 @@ export const rn = async (currentPath, query) => {
   const { firstArg, secondArg } = parsePathArgs(inputPath);
 
   if (firstArg && secondArg) {
-    console.log(firstArg)
-    console.log(secondArg)
     try {
       let isAccessNewFile = false;
       let newFile;
 
       const secondArgWithoutMarks = secondArg.split('"').join('');
       const previousFile = await cd(currentPath, 'cd ' + firstArg, false);
-      console.log(previousFile)
 
       if (previousFile[previousFile.length - 1] === path.sep) {
         previousFile = previousFile.slice(0, -1);
@@ -25,8 +22,6 @@ export const rn = async (currentPath, query) => {
       } else {
         newFile = path.join(previousFile.slice(0, previousFile.lastIndexOf(path.sep)), secondArgWithoutMarks.trim());
       }
-
-      console.log(newFile)
 
       await readFile(previousFile);
   
@@ -44,10 +39,4 @@ export const rn = async (currentPath, query) => {
   } else {
     process.stdout.write(`Invalid input\n`);
   }
-  
-  // console.log(firstArg);
-  // console.log(secondArg);
-  // console.log(isPathCorrect);
-  // console.log(inputPath.split('"'));
-  // console.log('divideIndex=', divideIndex)
 };

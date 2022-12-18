@@ -50,8 +50,7 @@ export const decompress = async (currentPath, query) => {
 
       try {
         await pipeline(readable, decompressBrotli, writeable);
-      } catch (err) {
-        console.log(err)
+      } catch {
         return process.stdout.write('Operation failed\n666');
       } 
     }
