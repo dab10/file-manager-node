@@ -11,7 +11,7 @@ export const cd = async (prevPath, chunkStringified, isDirectoryCheck) => {
   } 
 
   if (inputPath.includes('*') || inputPath.includes('?') || inputPath.includes('<') || inputPath.includes('>') || inputPath.includes('|')) {
-    process.stdout.write(`Invalid input\n`);
+    process.stdout.write(`Operation failed\n`);
     return prevPath
   } 
 
@@ -49,7 +49,7 @@ export const cd = async (prevPath, chunkStringified, isDirectoryCheck) => {
     } 
   }).join(path.sep);
   if (countDoubleMarks % 2 === 1 || isDoubleMarksInDiskName || isInvalidPath) {
-    process.stdout.write(`Invalid input\n`);
+    process.stdout.write(`Operation failed\n`);
     return prevPath;
   }
   inputPath = inputPathRes;
