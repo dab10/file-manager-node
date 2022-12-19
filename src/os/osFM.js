@@ -8,7 +8,7 @@ export const osFM = async (query) => {
   if (queryCommand === '--cpus') {
     const allData = os.cpus();
     process.stdout.write(`Total CPU: ${allData.length}\n`);
-    allData.map(item => process.stdout.write(`model: ${item.model}\nspeed: ${item.speed / 1000} GHz\n`))
+    allData.map(item => process.stdout.write(`model: ${item.model}\nclock rate: ${item.speed / 1000} GHz\n`))
     return;
   }
   if (queryCommand === '--homedir') {
